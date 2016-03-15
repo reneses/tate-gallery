@@ -1,4 +1,5 @@
 var fs = require('fs');
+var db = require('./db');
 
 /**
  * Read a JSON file
@@ -17,7 +18,7 @@ function readJsonFile(filename) {
  * @param collectionName
  * @param filename
  */
-function importJsonFileToDb(db, collectionName, filename) {
+function importJsonFileToDb(collectionName, filename) {
 
     // Read the file
     var jsonObject = readJsonFile(filename);
@@ -70,36 +71,42 @@ var findFiles = function (dir, extension, filelist) {
  * @param baseDirectory
  * @param collectionName
  */
-var importCollectionToDb = function (db, baseDirectory, collectionName) {
+var importCollectionToDb = function (baseDirectory, collectionName) {
     console.log("- Importing collection " + collectionName + " from " + baseDirectory + "/" + collectionName);
     var files = findFiles(baseDirectory + "/" + collectionName, '.json');
     files.forEach(function (jsonObject) {
-        importJsonFileToDb(db, collectionName, jsonObject);
+        importJsonFileToDb(collectionName, jsonObject);
     });
     console.log("-- " + files.length + " files successfully imported");
 };
 
 /**
- * Import the whole tate collection
- *
- * @param db
+ * Import function which will be exposed
  * @param baseDirectory
- * @param collectionName
  */
-var importTateCollection = function (db, baseDirectory, collectionName) {
-    db[collectionName].findOne({},{}, function (err, doc) {
-        if (doc)
-            console.log('- The ' + collectionName + ' DB has already been imported');
-        else
-            importCollectionToDb(db, baseDirectory, collectionName);
+var importDB = function (baseDirectory) {
+
+    console.log("Importing files to the DB...");
+
+    // Artists collection
+    db.artists.remove({}, function() {
+        importCollectionToDb(baseDirectory, 'artists');
+        db.artists.createIndex( { mda: "text" } , function() {
+            console.log ("- Artist index created on title");
+        });
     });
+
+    // Artworks collection
+    db.artworks.remove({}, function() {
+        importCollectionToDb(baseDirectory, 'artworks');
+        db.artworks.createIndex( { title: "text" }, function() {
+            console.log ("- Artist index created on artworks");
+            console.log("DB imported successfully");
+            process.exit(0);
+        });
+    });
+
 };
 
-// Exposed function
-exports.importTate = function (db, baseDirectory) {
-    console.log("Checking if the DB has to be imported...");
-    importTateCollection(db, baseDirectory, 'artists');
-    importTateCollection(db, baseDirectory, 'artworks');
-    db.artists.createIndex( { mda: "text" } );
-    db.artworks.createIndex( { title: "text" } );
-};
+// Import the files
+importDB('tate-gallery');

@@ -59,7 +59,4 @@ app.use(function (err, req, res, next) {
     });
 });
 
-// Import the tate DB
-require('./bin/import-db').importTate(db, 'tate-gallery');
-
 module.exports = app;
