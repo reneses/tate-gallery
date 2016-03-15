@@ -1,0 +1,19 @@
+doctype html
+html
+
+  head
+    title= title
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Work+Sans:600+800')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
+
+  body
+    .wrapper
+      include _header
+      #content
+        block content
+      #footer-push
+    include _footer
+
+    script(src='/javascripts/jquery.min.js')
+    block scripts

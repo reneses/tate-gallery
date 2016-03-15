@@ -1,0 +1,51 @@
+extends _layout
+
+block content
+
+  #art-wrapper
+
+    #art-info
+
+      h1= art.title
+        span#sub= art.dateText
+
+      h2= 'by '
+        a(href='/artists/' + art.contributors[0].id)= art.contributors[0].fc
+
+
+      if art.creditLine
+        p
+          span.strong - Credit line:&nbsp;
+          span= art.creditLine
+
+      if art.classification
+        p
+          span.strong - Type:&nbsp;
+          span= art.classification
+
+      if art.acquisitionYear
+        p
+          span.strong - Acquisition year:&nbsp;
+          span= art.acquisitionYear
+
+      if art.dimensions
+        p
+          span.strong - Dimensions:&nbsp;
+          span= art.dimensions
+
+      if art.width && art.height && art.units
+        p
+          span.strong - Size:&nbsp;
+          span= art.width + " x " + art.height + " " + art.units
+
+      if art.medium
+        p
+          span.strong - Medium:&nbsp;
+          span= art.medium
+
+    #art-image
+      img(src=art.thumbnailUrl)
+      p= art.thumbnailCopyright
+
+
+

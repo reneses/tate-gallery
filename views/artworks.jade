@@ -1,0 +1,27 @@
+extends _layout
+
+block content
+
+  header
+    h1 Art Gallery
+    form#search-form(method="get")
+      input(placeholder="Search", name="s")
+      button(type="Submit") <i class="fa fa-search"></i>
+
+
+  ul.page-navigation
+
+  #loading
+    i.fa.fa-spinner.fa-spin
+
+  ul#artworks-wrapper.grid-5
+
+  ul.page-navigation
+
+
+block scripts
+  script(src='/javascripts/artworks.js')
+
+
+
+

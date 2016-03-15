@@ -1,0 +1,24 @@
+extends _layout
+
+block content
+
+  header
+    h1 Artists
+    form#search-form(method="get")
+      input(placeholder="Search", name="s")
+      button(type="Submit") <i class="fa fa-search"></i>
+
+  ul.initials-wrapper
+    each letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+      li.initial(class='initial-'+letter)
+        a(href='#'+letter)= letter
+
+  ul#artists-wrapper
+
+  ul.initials-wrapper
+    each letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+      li.initial(class='initial-' + letter)
+        a(href='#' + letter)= letter
+
+block scripts
+  script(src='/javascripts/artists.js')

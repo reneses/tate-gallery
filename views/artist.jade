@@ -1,0 +1,25 @@
+extends _layout
+
+block content
+
+  h1= artist.mda
+    span#sub= artist.date.replace(/[a-zA-Z]/g, '').trim()
+
+  p
+    span.strong - Place of birth:&nbsp;
+    if artist.birth && artist.birth.place
+      span= artist.birth.place.name
+    if artist.death && artist.death.place
+      | <br>
+      span.strong - Place of death:&nbsp;
+      span= artist.death.place.name
+
+  h3 Pieces
+
+  ul#artist-artworks
+    each art in arts
+      li
+        a(href="/art/" + art.artworkId)
+          div.art-background(style="background-image: url('"+art.thumbnailUrl+"')")
+          span=art.title
+
