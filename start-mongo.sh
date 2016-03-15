@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 mkdir mongo
-mongod --dbpath mongo/
+mongod --auth --dbpath mongo/
