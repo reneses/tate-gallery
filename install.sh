@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo 'Downloading Tate collection from Github...'
-#git clone https://github.com/tategallery/collection.git tate-gallery-tmp
+git clone https://github.com/tategallery/collection.git tate-gallery-tmp
 
 echo 'Cleaning the downloaded files...'
 rm -rf tate-gallery
