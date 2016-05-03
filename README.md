@@ -1,5 +1,13 @@
 # Tate gallery
-Simple web gallery for the Tate Gallery build with Node.js + Express + Mongo
+Simple web gallery for the Tate Gallery build with Node.js + Express + Mongo.
+
+Developed by [Álvaro Reneses](http://www.reneses.io).
+
+## Disclaimer
+
+This repository is an autonomous assignment part of the **Advanced Web Publishing Apps** module offered by the [CIT](http://www.cit.ie). The original specifications of the assignment are included in the `assignment.pdf` file.
+
+Due to the time limitations of the assignment and the guidelines it had to follow, this repository should be used as a sample or proof of concept, rather than for production purposes.
 
 ## Tate collection 
 The Tate collection can be found and used at [their GitHub](https://github.com/tategallery/collection).
